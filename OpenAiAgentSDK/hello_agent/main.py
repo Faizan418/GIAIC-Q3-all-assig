@@ -1,10 +1,9 @@
 import os
-from agents import Agent, Runner, AsyncOpenAI, OpenAIChatCompletionsModel, RunConfig
+from openai import AsyncOpenAI
+from agents import Agent, Runner, OpenAIChatCompletionsModel, RunConfig
 from dotenv import load_dotenv
-
-
-
 load_dotenv()
+
 gemini_api_key = os.getenv('GEMINI_API_KEY')
 
 if not gemini_api_key:
@@ -13,7 +12,7 @@ if not gemini_api_key:
 
 external_client = AsyncOpenAI(
     api_key = gemini_api_key,
-    base_url = 'https://generativelanguage.googleapis.com/v1beta',
+    base_url = 'https://generativelanguage.googleapis.com/v1beta/openai/',
 )
 
 model = OpenAIChatCompletionsModel(
@@ -32,10 +31,12 @@ writer = Agent(
     instructions = 'You are a helpful writer agent.'
 )
 
+prompt = input("Enter your prompt: ")
+
 response = Runner.run_sync(
     writer,
-    input = "give me some Love poetry. roman english me likh kar do..",
+    prompt,
     run_config = config
 )
 print("Response from Writer Agent:")
-print(response)
+print(response.final_output)
