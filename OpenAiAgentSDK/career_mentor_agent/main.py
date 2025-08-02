@@ -1,7 +1,6 @@
-import os
 from dotenv import load_dotenv
 from roadmap_tool import get_career_roadmap
-from agents import Agent, Runner, function_tool
+from agents import Agent, Runner
 
 load_dotenv()
 

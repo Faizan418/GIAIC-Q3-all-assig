@@ -1,4 +1,3 @@
-import os
 from agents import Agent, Runner
 from dotenv import load_dotenv
 from game_tools import roll_dice, generate_event
